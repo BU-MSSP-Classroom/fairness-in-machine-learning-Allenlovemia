@@ -1,6 +1,6 @@
 ---
 title: "Fairness"
-author: "Your Name"
+author: "Yingmai Chen"
 date: "2023-02-07"
 output: html_document
 
@@ -71,7 +71,7 @@ show_code <- TRUE
 A German financial company wants to create a model that predicts the defaults on consumer loans in the German market.  When you are called in, the company has already built a model and asks you to evaluate it because there is a concern that this model unfairly evaluates young customers.  Your task is to figure out if this is true and to devise a way to correct this problem.  The data used to make predictions as well as the predictions can be found in `germancredit` data.
 
 ```{r}
-#install.packages('fairness')
+install.packages('fairness')
 data('germancredit',package ="fairness")
 ```
 The data contains the outcome of interest `BAD` indicating whether a customer has defaulted on a loan.  A model to predict default has already been fit and predicted probabilities of default (`probability`) and predicted status coded as yes/no for default (`predicted`) have been concatenated to the original data.  
@@ -308,6 +308,8 @@ print(CM)
 ```
 
 How about a decile plot?
+
+
 ```{r}
 revP =diabetes_glm_model$fitted
 dt = lift(diabetic$readmit_30_days, revP, groups = 10)
@@ -336,14 +338,15 @@ Please write your answer in full sentences.
 
 
 ~~~
+"0" in the readmit_30_days columns,assertive
 
 What type of justice is this issue about?
 
 ~~~
-Please write your answer in full sentences.
+
+Distributive Justice
 
 
-~~~
 
 Discuss the potential concerns about the data being used. 
 
@@ -353,11 +356,13 @@ Please write your answer in full sentences.
 
 ~~~
 
+These concerns can broadly be categorized into data quality, representativeness, privacy and consent, and bias and fairness.
+
 Discuss what type of group fairness metrics is appropriate for this problem.
 
 ~~~
 Please write your answer in full sentences.
-
+1. Demographic Parity (Statistical Parity);2.Equality of Opportunity3.Predictive Parity (Predictive Equality)4. Calibration
 
 ~~~
 
