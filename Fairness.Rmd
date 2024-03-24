@@ -325,10 +325,15 @@ Do you see any problem with this model with protected attributes such as race an
 Choose one of the data described above as your target problem.
 
 ~~~
+
+Diabetes dataset
+
 Please write your answer in full sentences.
 
 
 ~~~
+
+0 in readmit_30_days, assistive
 
 Discuss what a favorable label in this problem is and what does a favorable label grant the affected user?
 Is it assertive or non-punitive?
@@ -343,7 +348,6 @@ Please write your answer in full sentences.
 What type of justice is this issue about?
 
 ~~~
-
 Distributive Justice
 
 
@@ -369,8 +373,26 @@ Please write your answer in full sentences.
 Using the appropriate fairness metrics, show if there are concerns in the prediction algorithm.
 
 ```{r}
-#
-#
+library(dplyr)
+data = diabetic
+prediction<- predict(diabetes_glm_model, newdata = diabetic, type = "response")
+
+
+prob_privileged <- data %>%
+  filter(readmit_30_days == 1) %>%
+  summarise(prob = mean(prediction)) %>%
+  .$prob
+
+
+prob_unprivileged <- data %>%
+  filter(readmit_30_days == 0) %>%
+  summarise(prob = mean(prediction)) %>%
+  .$prob
+
+stat_parity_difference <- prob_privileged - prob_unprivileged
+
+
+print(paste("Statistical Parity Difference: ", stat_parity_difference))
 ```
 
 ~~~
@@ -381,17 +403,13 @@ Please write your answer in full sentences.
 
 Given that you have access to the original data, but not to the model used to make the prediction, discuss which mitigation strategy might be more appropriate to deal with the problem, if any.
 
-```{r}
-#
-#
-```
 
 ~~~
 Please write your answer in full sentences.
 
 
 ~~~
-
+Re-balancing the dataset,Transforming features,Removing biased instances,Disparate impact analysis,Fairness-aware algorithms,Regularization techniques,Adjusting the decision threshold, Bias and Fairness Auditing,Human-in-the-loop.
 
 ## Fairness Metrics
 
